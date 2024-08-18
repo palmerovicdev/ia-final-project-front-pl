@@ -1,7 +1,6 @@
 # IA-Final-Project
 
-A new Flutter project.
-
+A Flutter project based on the premise of an application that students can use for their study sesions.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
