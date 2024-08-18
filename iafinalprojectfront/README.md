@@ -1,7 +1,17 @@
 # IA-Final-Project
 
 A Flutter project based on the premise of an application that students can use for their study sesions.
-## Getting Started
+## Introduction
+
+The application is divided into three main parts:
+
+- Number Translator
+- Score
+- Auth
+
+### Number Translator
+
+The number translator is a game that allows the user to translate a number into its corresponding words.
 
 This project is a starting point for a Flutter application.
 
