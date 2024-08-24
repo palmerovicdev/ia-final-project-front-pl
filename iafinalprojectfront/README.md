@@ -12,3 +12,7 @@ The application is divided into three main parts:
 ### Number Translator
 
 The number translator is a game that allows the user to translate a number into its corresponding words and vice versa.
+
+### Score
+
+The score is a simple application that allows the user to save their score and view their previous scores.
