@@ -13,7 +13,6 @@ The application is divided into three main parts:
 
 The number translator is a game that allows the user to translate a number into its corresponding words.
 
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
