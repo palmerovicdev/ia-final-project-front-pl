@@ -20,3 +20,5 @@ The score is a simple application that allows the user to save their score and v
 The users can also search for their scores.
 
 ### Auth
+
+This is a simple application that allows the user to sign up and log in.
