@@ -25,4 +25,3 @@ This is a simple application that allows the user to sign up and log in.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
