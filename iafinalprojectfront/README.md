@@ -24,3 +24,5 @@ The users can also search for their scores.
 This is a simple application that allows the user to sign up and log in.
 
 ## Developers
+
+- [Victor Palmero](https://github.com/palmerodev)
