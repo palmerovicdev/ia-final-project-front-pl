@@ -25,5 +25,5 @@ This is a simple application that allows the user to sign up and log in.
 
 ## Developers
 
-- [Victor Palmero](https://github.com/palmerodev)
+- [Victor Palmero](https://github.com/palmerovicdev)
 - [Marcos Portales](https://github.com/marcosportales)
