@@ -3,7 +3,7 @@
 A Flutter project based on the premise of an application that students can use for their study sesions.
 ## Introduction
 
-The application is divided into three main parts:
+The application is divided into four main parts:
 
 - Number Translator
 - Score
