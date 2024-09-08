@@ -26,6 +26,7 @@ This is a simple feature that allows the user to sign up and log in.
 
 ### Games
 
+There are two games for now in this application:
 ## Developers
 
 - [Victor Palmero](https://github.com/palmerovicdev)
