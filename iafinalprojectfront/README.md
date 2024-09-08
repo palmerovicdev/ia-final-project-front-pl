@@ -8,6 +8,7 @@ The application is divided into three main parts:
 - Number Translator
 - Score
 - Auth
+- Games
 
 ### Number Translator
 
