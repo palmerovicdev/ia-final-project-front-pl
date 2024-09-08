@@ -25,6 +25,7 @@ The users can also search for their scores.
 This is a simple feature that allows the user to sign up and log in.
 
 ### Games
+
 ## Developers
 
 - [Victor Palmero](https://github.com/palmerovicdev)
