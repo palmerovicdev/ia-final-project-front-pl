@@ -15,7 +15,7 @@ The number translator is a game that allows the user to translate a number into 
 
 ### Score
 
-The score is a simple application that allows the user to save their score and view their previous scores.
+The score is a simple feature that allows the user to save their score and view their previous scores.
 
 The users can also search for their scores.
 
