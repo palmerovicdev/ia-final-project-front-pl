@@ -29,6 +29,7 @@ This is a simple feature that allows the user to sign up and log in.
 There are two games for now in this application:
 
 - Number Translator
+  - A game that allows the user to translate a number into its corresponding words in a limited time.
 - Word Guess
 
 ## Developers
