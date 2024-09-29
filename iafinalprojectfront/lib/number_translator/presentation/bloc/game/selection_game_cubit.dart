@@ -19,7 +19,7 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
 
   Future<void> startGame() async {
     var number = Random().nextInt(1000000000);
-    var response = await serviceLocator.get<NumberTranslatorService>().makeTranslate(request: ConsultEntity(number: '$number'), isFromDigit: true);
+    var response = await serviceLocator.get<NumberTranslatorService>().makeTranslate(request: ConsultEntity(number: '$number'), isFromDigit: false);
     var words = response.data.hashResponse.split(' ');
     var currentRound = state is SelectionGameInitial ? 1 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).round + 1 : 1;
     var currentPoints = state is SelectionGameInitial ? 0 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).points : 0;
@@ -29,6 +29,7 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
       round: currentRound,
       points: currentPoints,
       healthPercentage: 1.0,
+      number: number,
     ));
   }
 

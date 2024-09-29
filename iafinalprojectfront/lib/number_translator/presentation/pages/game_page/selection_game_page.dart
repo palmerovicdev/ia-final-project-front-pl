@@ -49,16 +49,24 @@ class SelectionGamePage extends StatelessWidget {
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
               CustomAnimatedHealthWidget(
                 percentage: 1.0,
                 onFinished: () => BlocProvider.of<SelectionGameCubit>(context).finishGame(),
               ),
               const Gap(20),
-              CustomNumberWordsWidget(
-                words: state.words,
-                wordIndex: state.wordIndex,
-                responseTextController: BlocProvider.of<SelectionGameCubit>(context).responseTextController,
+              Text(
+                '${state.number}',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
+              ),
+              const Gap(20),
+              Flexible(
+                child: CustomNumberWordsWidget(
+                  words: state.words,
+                  wordIndex: state.wordIndex,
+                  responseTextController: BlocProvider.of<SelectionGameCubit>(context).responseTextController,
+                ),
               ),
               const Gap(20),
               OutlinedButton(

@@ -15,11 +15,12 @@ class SelectionGameInProgress extends SelectionGameState {
   final int round;
   final int points;
   final double healthPercentage;
+  final int number;
 
-  const SelectionGameInProgress({required this.wordIndex, required this.round, required this.points, required this.healthPercentage, required this.words});
+  const SelectionGameInProgress({required this.wordIndex, required this.round, required this.points, required this.healthPercentage, required this.words, required this.number});
 
   @override
-  List<Object> get props => [wordIndex, round, points, healthPercentage];
+  List<Object> get props => [wordIndex, round, points, healthPercentage, number];
 
   // copy with
   SelectionGameInProgress copyWith({String? word, int? round, int? points, double? healthPercentage, List<String>? words}) {
@@ -29,6 +30,7 @@ class SelectionGameInProgress extends SelectionGameState {
       points: points ?? this.points,
       healthPercentage: healthPercentage ?? this.healthPercentage,
       words: words ?? this.words,
+      number: number,
     );
   }
 }

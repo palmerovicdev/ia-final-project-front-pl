@@ -18,25 +18,28 @@ class CustomNumberWordsWidget extends StatelessWidget {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Text(
           initialText,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
         ),
         const SizedBox(width: 5.0),
-        TextField(
-          controller: responseTextController,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            isDense: true,
-            contentPadding: EdgeInsets.zero,
+        Flexible(
+          child: TextField(
+            controller: responseTextController,
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              isDense: true,
+              contentPadding: EdgeInsets.zero,
+            ),
+            onChanged: (value) {
+              if (value.length == 1) {
+                responseTextController.text = value;
+              }
+            },
           ),
-          onChanged: (value) {
-            if (value.length == 1) {
-              responseTextController.text = value;
-            }
-          },
         ),
         const SizedBox(width: 5.0),
         Text(
