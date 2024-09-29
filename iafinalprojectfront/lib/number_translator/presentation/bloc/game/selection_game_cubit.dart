@@ -24,7 +24,8 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
     var currentRound = state is SelectionGameInitial ? 1 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).round + 1 : 1;
     var currentPoints = state is SelectionGameInitial ? 0 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).points : 0;
     emit(SelectionGameInProgress(
-      word: words[Random().nextInt(words.length)],
+      words: words,
+      wordIndex: Random().nextInt(words.length),
       round: currentRound,
       points: currentPoints,
       healthPercentage: 1.0,
@@ -35,7 +36,7 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
     if (state is! SelectionGameInProgress) return;
     var currentState = state as SelectionGameInProgress;
     var currentUserWord = responseTextController.text;
-    if (currentUserWord == currentState.word) {
+    if (currentUserWord == currentState.words[currentState.wordIndex]) {
       emit(currentState.copyWith(
         round: currentState.round + 1,
         points: (currentState.points + currentState.healthPercentage * currentState.round) as int,
@@ -59,7 +60,6 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
         date: DateTime.now().toString(),
       ),
     );
-
     reset();
   }
 
