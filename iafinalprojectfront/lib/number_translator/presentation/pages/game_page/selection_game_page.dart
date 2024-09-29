@@ -12,7 +12,7 @@ class SelectionGamePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer(listener: (context, state) {
+    return BlocConsumer<SelectionGameCubit, SelectionGameState>(listener: (context, state) {
       if (state is SelectionGameFinished) {
         BlocProvider.of<SelectionGameCubit>(context).reset();
       }
