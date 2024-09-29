@@ -2,7 +2,7 @@ class ConfigurationData {
   ConfigurationData({
     this.baseUrl = "http://localhost:34545",
     this.contentType = "application/json",
-    this.debugging = true,
+    this.debugging = false,
   });
 
   String baseUrl;

@@ -158,20 +158,18 @@ class NumberTranslatorPage extends StatelessWidget {
                   children: [
                     CustomTooltip(
                       message: tr('play_a_game'),
-                      child: FloatingActionButton(
+                      child: FilledButton(
                         key: const Key('playGameButton'),
                         onPressed: () => context.pushNamed(Routes.selectionGame.name),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                         child: const Icon(Icons.gamepad_outlined),
                       ),
                     ),
                     const Gap(10),
                     CustomTooltip(
                       message: tr('play_a_game'),
-                      child: FloatingActionButton(
+                      child: FilledButton(
                         key: const Key('playGame2Button'),
                         onPressed: () => context.pushNamed(Routes.gamePage.name),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                         child: const Icon(Icons.gamepad_outlined),
                       ),
                     ),

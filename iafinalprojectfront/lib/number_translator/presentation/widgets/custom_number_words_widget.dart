@@ -1,34 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class CustomNumberWordsWidget extends StatelessWidget {
   const CustomNumberWordsWidget({super.key, required this.words, required this.wordIndex, required this.responseTextController});
+
   final List<String> words;
   final int wordIndex;
   final TextEditingController responseTextController;
 
   @override
   Widget build(BuildContext context) {
-    var initialText = words.sublist(0, wordIndex).join('');
-    var finalText = '';
+    var initialText = words.sublist(0, wordIndex);
+    List<String> finalText = [];
     if (wordIndex + 1 < words.length - 1) {
-      finalText = words.sublist(wordIndex + 1, words.length).join('');
+      finalText = words.sublist(wordIndex + 1, words.length);
     } else if (wordIndex + 1 == words.length - 1) {
-      finalText = words[wordIndex + 1];
+      finalText.add(words[wordIndex + 1]);
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          initialText,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
-        ),
+        ...initialText.map((e) => Row(
+          children: [
+            Text(
+              e,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.0, fontWeight: FontWeight.w400),
+            ),
+            const Gap(10),
+          ],
+        )),
         const SizedBox(width: 5.0),
         Flexible(
           child: TextField(
             controller: responseTextController,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.0, fontWeight: FontWeight.w400),
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               isDense: true,
@@ -42,10 +47,15 @@ class CustomNumberWordsWidget extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 5.0),
-        Text(
-          finalText,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 64.0, fontWeight: FontWeight.w500),
-        ),
+        ...finalText.map((e) => Row(
+          children: [
+            Text(
+                  e,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 12.0, fontWeight: FontWeight.w400),
+                ),
+            const Gap(10),
+          ],
+        )),
       ],
     );
   }
