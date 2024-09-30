@@ -21,14 +21,28 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
     var number = Random().nextInt(1000000000);
     var response = await serviceLocator.get<NumberTranslatorService>().makeTranslate(request: ConsultEntity(number: '$number'), isFromDigit: false);
     var words = response.data.hashResponse.split(' ');
-    var currentRound = state is SelectionGameInitial ? 1 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).round + 1 : 1;
-    var currentPoints = state is SelectionGameInitial ? 0 : state is SelectionGameInProgress ? (state as SelectionGameInProgress).points : 0;
+    var currentRound = state is SelectionGameInitial
+        ? 1
+        : state is SelectionGameInProgress
+            ? (state as SelectionGameInProgress).round + 1
+            : 1;
+    var currentPoints = state is SelectionGameInitial
+        ? 0
+        : state is SelectionGameInProgress
+            ? (state as SelectionGameInProgress).points
+            : 0;
+    var currentHealthPercentage = state is SelectionGameInitial
+        ? 1.0
+        : state is SelectionGameInProgress
+            ? (state as SelectionGameInProgress).healthPercentage
+            : 1.0;
+    responseTextController.clear();
     emit(SelectionGameInProgress(
       words: words,
       wordIndex: Random().nextInt(words.length),
       round: currentRound,
       points: currentPoints,
-      healthPercentage: 1.0,
+      healthPercentage: currentHealthPercentage,
       number: number,
     ));
   }
@@ -40,9 +54,10 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
     if (currentUserWord == currentState.words[currentState.wordIndex]) {
       emit(currentState.copyWith(
         round: currentState.round + 1,
-        points: (currentState.points + currentState.healthPercentage * currentState.round) as int,
+        points: (currentState.points + currentState.healthPercentage * currentState.round).ceil().toInt(),
         healthPercentage: currentState.healthPercentage,
       ));
+      startGame();
       return;
     }
     if (currentState.healthPercentage - currentState.round * 0.05 <= 0) {
@@ -55,12 +70,12 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
   void finishGame() {
     if (state is! SelectionGameInProgress) return;
     serviceLocator.get<ScoreService>().save(
-      UserScoreEntity(
-        username: serviceLocator.get<AuthService>().get()!.username,
-        score: '${(state as SelectionGameFinished).points}',
-        date: DateTime.now().toString(),
-      ),
-    );
+          UserScoreEntity(
+            username: serviceLocator.get<AuthService>().get()!.username,
+            score: '${(state as SelectionGameFinished).points}',
+            date: DateTime.now().toString(),
+          ),
+        );
     reset();
   }
 
