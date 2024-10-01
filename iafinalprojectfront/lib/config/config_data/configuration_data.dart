@@ -7,7 +7,6 @@ class ConfigurationData {
 
   String baseUrl;
   final String contentType;
-
   final bool debugging;
 
   ConfigurationData copyWith({
