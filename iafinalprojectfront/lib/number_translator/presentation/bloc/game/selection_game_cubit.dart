@@ -14,12 +14,22 @@ import '../../../domain/use_cases/number_translator/number_translator_service.da
 part 'selection_game_state.dart';
 
 class SelectionGameCubit extends Cubit<SelectionGameState> {
-  SelectionGameCubit() : super(SelectionGameInitial());
+  SelectionGameCubit()
+      : super(const SelectionGameInitial(
+          isInitializing: true,
+        ));
   final TextEditingController responseTextController = TextEditingController();
+
+  void saveFirstTime() {
+    emit((state as SelectionGameInitial).copyWith(isFirstTime: false));
+  }
 
   Future<void> startGame() async {
     var number = Random().nextInt(1000000000);
-    var response = await serviceLocator.get<NumberTranslatorService>().makeTranslate(request: ConsultEntity(number: '$number'), isFromDigit: false);
+    var response = await serviceLocator
+        .get<NumberTranslatorService>()
+        .makeTranslate(
+            request: ConsultEntity(number: '$number'), isFromDigit: false);
     var words = response.data.hashResponse.split(' ');
     var currentRound = state is SelectionGameInitial
         ? 1
@@ -38,8 +48,8 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
             : 1.0;
     responseTextController.clear();
     emit(SelectionGameInProgress(
-      words: words,
       wordIndex: Random().nextInt(words.length),
+      words: words,
       round: currentRound,
       points: currentPoints,
       healthPercentage: currentHealthPercentage,
@@ -54,7 +64,10 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
     if (currentUserWord == currentState.words[currentState.wordIndex]) {
       emit(currentState.copyWith(
         round: currentState.round + 1,
-        points: (currentState.points + currentState.healthPercentage * currentState.round).ceil().toInt(),
+        points: (currentState.points +
+                currentState.healthPercentage * currentState.round)
+            .ceil()
+            .toInt(),
         healthPercentage: currentState.healthPercentage,
       ));
       startGame();
@@ -64,7 +77,10 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
       emit(SelectionGameFinished(points: currentState.points));
       return;
     }
-    emit(currentState.copyWith(healthPercentage: currentState.healthPercentage - currentState.round * 0.05));
+    emit(currentState.copyWith(
+      healthPercentage:
+          currentState.healthPercentage - currentState.round * 0.05,
+    ));
   }
 
   void finishGame() {
@@ -80,6 +96,9 @@ class SelectionGameCubit extends Cubit<SelectionGameState> {
   }
 
   void reset() {
-    emit(SelectionGameInitial());
+    emit(const SelectionGameInitial(
+      isFirstTime: false,
+      isInitializing: true,
+    ));
   }
 }
