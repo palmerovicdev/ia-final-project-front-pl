@@ -24,12 +24,18 @@ class NumberTranslatorPage extends StatelessWidget {
     final cubit = serviceLocator.get<NumberTranslatorCubit>();
     return BlocConsumer<ConfigurationsCubit, ConfigurationsState>(
       buildWhen: (previous, current) {
-        if (previous is! ConfigurationsInitial || current is! ConfigurationsInitial) return false;
+        if (previous is! ConfigurationsInitial ||
+            current is! ConfigurationsInitial) return false;
         return previous.isSpanishLanguage != current.isSpanishLanguage;
       },
       listener: (context, state) {
-        context.setLocale((state as ConfigurationsInitial).isSpanishLanguage ? context.supportedLocales.first : context.supportedLocales.last);
-        serviceLocator.get<ConfigurationsCubit>().currentLanguage = context.locale == context.supportedLocales.first ? tr('spanish_language') : tr('english_language');
+        context.setLocale((state as ConfigurationsInitial).isSpanishLanguage
+            ? context.supportedLocales.first
+            : context.supportedLocales.last);
+        serviceLocator.get<ConfigurationsCubit>().currentLanguage =
+            context.locale == context.supportedLocales.first
+                ? tr('spanish_language')
+                : tr('english_language');
       },
       builder: (context, state) {
         cubit.validateNumberToTranslate();
@@ -37,7 +43,8 @@ class NumberTranslatorPage extends StatelessWidget {
           appBar: AppBar(
             title: Padding(
               padding: const EdgeInsets.only(left: 10.0),
-              child: Text(tr('number_translator_page_title'), style: const TextStyle(fontSize: 20)),
+              child: Text(tr('number_translator_page_title'),
+                  style: const TextStyle(fontSize: 20)),
             ),
             toolbarHeight: height * 0.1,
             actions: [
@@ -82,9 +89,18 @@ class NumberTranslatorPage extends StatelessWidget {
                         onTap: () {
                           serviceLocator.get<AuthCubit>().logOut();
                           // reset text form fields
-                          serviceLocator.get<AuthCubit>().usernameController.text = '';
-                          serviceLocator.get<AuthCubit>().passwordController.text = '';
-                          serviceLocator.get<AuthCubit>().repeatPasswordController.text = '';
+                          serviceLocator
+                              .get<AuthCubit>()
+                              .usernameController
+                              .text = '';
+                          serviceLocator
+                              .get<AuthCubit>()
+                              .passwordController
+                              .text = '';
+                          serviceLocator
+                              .get<AuthCubit>()
+                              .repeatPasswordController
+                              .text = '';
                           context.replaceNamed(Routes.authPage.name);
                         },
                       ),
@@ -103,16 +119,26 @@ class NumberTranslatorPage extends StatelessWidget {
                         ? Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  firstTextFormField(context, height, width * 0.45, cubit, state, () => cubit.changeTranslationType()),
+                                  firstTextFormField(
+                                      context,
+                                      height,
+                                      width * 0.45,
+                                      cubit,
+                                      state,
+                                      () => cubit.changeTranslationType()),
                                   CustomTooltip(
                                     message: tr('swap'),
                                     child: Padding(
-                                      padding: EdgeInsets.only(top: height * 0.216),
+                                      padding:
+                                          EdgeInsets.only(top: height * 0.216),
                                       child: IconButton.outlined(
-                                        onPressed: () => context.read<NumberTranslatorCubit>().changeTranslationType(),
+                                        onPressed: () => context
+                                            .read<NumberTranslatorCubit>()
+                                            .changeTranslationType(),
                                         icon: Icon(
                                           size: (height + width) * 0.015,
                                           Icons.swap_horiz,
@@ -120,7 +146,8 @@ class NumberTranslatorPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  secondTextFormField(context, height, width * 0.45, cubit, state, () {
+                                  secondTextFormField(context, height,
+                                      width * 0.45, cubit, state, () {
                                     return cubit.changeTranslationType();
                                   }),
                                 ],
@@ -131,8 +158,12 @@ class NumberTranslatorPage extends StatelessWidget {
                                 height: 50,
                                 child: FloatingActionButton(
                                   isExtended: true,
-                                  child: Text(tr('play_a_game'), style: Theme.of(context).textTheme.titleMedium),
-                                  onPressed: () => context.pushNamed(Routes.gamePage.name),
+                                  child: Text(tr('play_a_game'),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleMedium),
+                                  onPressed: () =>
+                                      context.pushNamed(Routes.gamePage.name),
                                 ),
                               )
                             ],
@@ -141,8 +172,10 @@ class NumberTranslatorPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              firstTextFormField(context, height, width, cubit, state, () => cubit.changeTranslationType()),
-                              secondTextFormField(context, height, width, cubit, state, () => cubit.changeTranslationType()),
+                              firstTextFormField(context, height, width, cubit,
+                                  state, () => cubit.changeTranslationType()),
+                              secondTextFormField(context, height, width, cubit,
+                                  state, () => cubit.changeTranslationType()),
                             ],
                           );
                   }
@@ -152,28 +185,39 @@ class NumberTranslatorPage extends StatelessWidget {
             ),
           ),
           floatingActionButton: width < 600
-              ? Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomTooltip(
-                      message: tr('play_a_game'),
-                      child: FilledButton(
-                        key: const Key('playGameButton'),
-                        onPressed: () => context.pushNamed(Routes.selectionGame.name),
-                        child: const Icon(Icons.gamepad_outlined),
+              ? PopupMenuButton(
+                  style: const ButtonStyle(
+                    backgroundColor:
+                        WidgetStatePropertyAll<Color>(Colors.transparent),
+                  ),
+                  iconColor: Theme.of(context).colorScheme.primary,
+                  icon: const Icon(Icons.gamepad_outlined),
+                  tooltip: tr('play_a_game'),
+                  itemBuilder: (context) {
+                    return List.of([
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(tr('normal_game')),
+                            const Icon(Icons.spellcheck, size: 20),
+                          ],
+                        ),
+                        onTap: () =>
+                            context.pushNamed(Routes.selectionGame.name),
                       ),
-                    ),
-                    const Gap(10),
-                    CustomTooltip(
-                      message: tr('play_a_game'),
-                      child: FilledButton(
-                        key: const Key('playGame2Button'),
-                        onPressed: () => context.pushNamed(Routes.gamePage.name),
-                        child: const Icon(Icons.gamepad_outlined),
+                      PopupMenuItem(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(tr('select_game')),
+                            const Icon(Icons.timer_outlined, size: 20),
+                          ],
+                        ),
+                        onTap: () => context.pushNamed(Routes.gamePage.name),
                       ),
-                    ),
-                  ],
+                    ]);
+                  },
                 )
               : null,
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
@@ -193,7 +237,8 @@ class NumberTranslatorPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: width > 600 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment:
+            width > 600 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -227,7 +272,9 @@ class NumberTranslatorPage extends StatelessWidget {
             child: CustomTextFormField(
               controller: cubit.numberToTranslateController,
               readOnly: false,
-              borderColor: state.validationFailed ? Theme.of(context).colorScheme.error : null,
+              borderColor: state.validationFailed
+                  ? Theme.of(context).colorScheme.error
+                  : null,
               onChanged: (value) async {
                 if (await cubit.validateNumberToTranslate()) {
                   cubit.translate(
@@ -253,7 +300,8 @@ class NumberTranslatorPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: width > 600 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment:
+            width > 600 ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           Row(
             children: [
@@ -285,7 +333,9 @@ class NumberTranslatorPage extends StatelessWidget {
             height: height * 0.25,
             width: width * 0.85,
             child: CustomTextFormField(
-              borderColor: state.validationFailed ? Theme.of(context).colorScheme.error : null,
+              borderColor: state.validationFailed
+                  ? Theme.of(context).colorScheme.error
+                  : null,
               controller: cubit.translatedNumberController,
               readOnly: true,
             ),
