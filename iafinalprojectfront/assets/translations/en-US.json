@@ -13,7 +13,9 @@
   "spanish_language": "Español",
   "english_language": "English",
   "current_language": "English",
-  "play_a_game": "Play a game!",
+  "play_a_game": "Play a game",
+  "normal_game": "Game 1",
+  "select_game": "Game 2",
   "settings": "Settings",
   "translate_numbers": "Translate numbers",
   "translate_letters": "Translate number names",
@@ -43,8 +45,9 @@
   "repeat_your_password": "Repeat your password",
   "profile": "Profile",
   "score": "Score",
-  "logout":"Logout",
+  "logout": "Logout",
   "user_score_title": "Scores",
   "invalid_password": "Username or password invalid",
   "invalid_username": "Username already exists"
 }
+

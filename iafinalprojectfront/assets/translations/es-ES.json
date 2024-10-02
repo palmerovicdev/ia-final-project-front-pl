@@ -13,7 +13,9 @@
   "spanish_language": "Español",
   "english_language": "English",
   "current_language": "Español",
-  "play_a_game": "Jugar!",
+  "play_a_game": "Jugar",
+  "normal_game": "Juego 1",
+  "select_game": "Juego 2",
   "settings": "Opciones",
   "translate_numbers": "Traducir números",
   "translate_letters": "Traducir nombres de números",
@@ -48,3 +50,4 @@
   "invalid_passowrd": "Nombre de usuario o contraseña inválido",
   "invalid_username": "Nombre de usuario existente"
 }
+
