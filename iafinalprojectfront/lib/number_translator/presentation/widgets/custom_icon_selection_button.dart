@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class CustomIconSelectionButton extends StatelessWidget {
   const CustomIconSelectionButton({
-    Key? key,
+    super.key,
     this.onSelected,
     this.icon,
     this.isSelected = false,
-  }) : super(key: key);
+  });
 
   final IconData? icon;
   final bool isSelected;
