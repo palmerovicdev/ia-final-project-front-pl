@@ -150,9 +150,9 @@ class AuthPage extends StatelessWidget {
       required BuildContext context}) {
     var cubit = serviceLocator.get<AuthCubit>();
     return [
-      RawKeyboardListener(
+      KeyboardListener(
         focusNode: FocusNode(),
-        onKey: (value) {
+        onKeyEvent: (value) {
           if (value.logicalKey == LogicalKeyboardKey.enter) {
             cubit.validatePassword(
                 () => context.replaceNamed(Routes.numberTranslator.name));
