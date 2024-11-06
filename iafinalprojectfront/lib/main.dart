@@ -56,9 +56,7 @@ class NumberTranslateApp extends StatelessWidget {
 }
 
 class _NumberTranslateApp extends StatelessWidget {
-  const _NumberTranslateApp({
-    super.key,
-  });
+  const _NumberTranslateApp();
 
   @override
   Widget build(BuildContext context) {
