@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 
 class GeneralUsersResponse<T> {
   final String version;
