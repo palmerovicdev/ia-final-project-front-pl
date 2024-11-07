@@ -53,7 +53,7 @@ class AuthCubit extends Cubit<AuthState> {
       emit(const AuthInitial());
       return;
     }
-    emit(state.copyWith(isValidPassword: false)); //todo: show auth error
+    emit(state.copyWith(isValidPassword: false));
   }
 
   void validateTextFormFields(String value) {
