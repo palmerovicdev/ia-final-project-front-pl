@@ -9,7 +9,6 @@ The application is divided into four main parts:
 - Score
 - Auth
 - Games
-- 
 
 ### Number Translator
 
