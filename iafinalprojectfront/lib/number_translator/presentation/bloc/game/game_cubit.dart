@@ -44,8 +44,8 @@ class GameCubit extends Cubit<GameState> {
     if (responseTextController.text == currentTranslation &&
         !(state as GameInitial).finished) {
       var now = DateTime.now();
-      var diference = now.difference(initiationTime).inSeconds;
-      currentPoints += currentNumber ~/ diference;
+      var difference = now.difference(initiationTime).inSeconds;
+      currentPoints += currentNumber ~/ difference;
       var nextLimit = (state as GameInitial).randomNumberLimit + 10000;
       startGame(limit: nextLimit > maxLimit ? maxLimit : nextLimit);
     } else {
