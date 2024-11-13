@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CustomNumberWordsWidget extends StatelessWidget {
@@ -19,7 +20,9 @@ class CustomNumberWordsWidget extends StatelessWidget {
     var fontSize = 20.0;
     var weight = FontWeight.w600;
     var width = getTextSize(words[wordIndex], context, fontSize, weight);
-    print(words[wordIndex]);
+    if (kDebugMode) {
+      print(words[wordIndex]);
+    }
 
     return Wrap(
       alignment: WrapAlignment.center,
