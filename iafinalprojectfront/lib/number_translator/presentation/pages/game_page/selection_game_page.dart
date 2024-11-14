@@ -193,9 +193,14 @@ class SelectionGamePage extends StatelessWidget {
   }
 }
 
-class _SelectionGameIntroduction extends StatelessWidget {
+class _SelectionGameIntroduction extends StatefulWidget {
   const _SelectionGameIntroduction();
 
+  @override
+  State<_SelectionGameIntroduction> createState() => _SelectionGameIntroductionState();
+}
+
+class _SelectionGameIntroductionState extends State<_SelectionGameIntroduction> {
   @override
   Widget build(BuildContext context) {
     var cubit = serviceLocator.get<SelectionGameCubit>();
